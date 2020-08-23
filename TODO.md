@@ -3,8 +3,9 @@
 - ~~Set up project~~
 - ~~Coin, Product, VendingMachine scaffolds with specs~~
 - ~~Restock vending machine~~
-- REPL
-- Parse input
+- ~~REPL~~
+- ~~Parse input~~
+- Nice printing
 - Insert coins
 - Purchase product
 - Dispense change

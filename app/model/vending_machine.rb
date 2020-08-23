@@ -1,3 +1,6 @@
+require_relative 'coin'
+require_relative 'product'
+
 class VendingMachine
   # do we want to allow these to be accessed?
   attr_accessor :amount, :coins, :products
@@ -9,6 +12,13 @@ class VendingMachine
   def restock
     stock_coins
     stock_products
+  end
+
+  def print_contents
+    puts "Coins:"
+    @coins.each { |c| puts c.to_s }
+    puts "Products:"
+    @products.each { |c| puts c.to_s }
   end
 
   protected
@@ -25,10 +35,5 @@ class VendingMachine
         Product.new("Chocolate", 99),
         Product.new("Freddo", 527)
     ]
-  end
-
-  def print_contents
-    puts "Coins:"
-    @coins.each { |c| puts c.to_s }
   end
 end

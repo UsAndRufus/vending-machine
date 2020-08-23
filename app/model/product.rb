@@ -1,7 +1,6 @@
 require 'securerandom'
 
 class Product
-
   attr :id, :name, :price
 
   def initialize(name, price)
@@ -10,4 +9,7 @@ class Product
     @price = price
   end
 
+  def to_s
+    "#{name} (#{price})"
+  end
 end
