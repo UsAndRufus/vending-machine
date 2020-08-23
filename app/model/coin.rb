@@ -21,9 +21,15 @@ class Coin
   end
 
   def +(obj)
-    raise ArgumentError unless obj.is_a? Coin
+    value + obj.to_i
+  end
 
-    value + obj.value
+  def coerce(other)
+    [ self, other ]
+  end
+
+  def to_i
+    value
   end
 
   def to_s

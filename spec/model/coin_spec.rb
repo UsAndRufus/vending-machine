@@ -12,10 +12,10 @@ describe Coin do
       assert_equal 201, @coin + coin2
     end
 
-    it "raises ArgumentError if other object is not a Coin" do
-      assert_raises ArgumentError do
-        @coin + 23
-      end
+    it "returns the integer sum of an integer and a coin" do
+      assert_equal 201, 1 + @coin
+
+      assert_equal 201, @coin + 1
     end
   end
 end

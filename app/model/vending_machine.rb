@@ -1,13 +1,16 @@
 require_relative 'coin'
+require_relative 'coin_store'
 require_relative 'product'
 
 class VendingMachine
   # do we want to allow these to be accessed?
-  attr_accessor :coins, :products
-  attr :payment
+  attr_accessor :products
+  attr :payment, :bank
 
   def initialize
     @payment = []
+    @payment = CoinStore.new
+    @bank = CoinStore.new
     restock
   end
 
@@ -23,7 +26,7 @@ class VendingMachine
 
   def print_coins
     puts "Coins:"
-    @coins.each { |c| puts c.to_s }
+    @bank.print_contents
   end
 
   def print_products
@@ -34,7 +37,9 @@ class VendingMachine
   protected
 
   def stock_coins
-    @coins = 100.times.map { Coin.random }
+    coins = 100.times.map { Coin.random }
+
+    @bank.stock coins
   end
 
   def stock_products

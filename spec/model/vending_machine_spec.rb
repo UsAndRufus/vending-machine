@@ -8,7 +8,7 @@ describe VendingMachine do
     end
 
     it "initialises it with 100 random coins" do
-      assert_equal 100, @vending_machine.coins.count
+      assert_equal 100, @vending_machine.bank.count
     end
 
     it "initialises it with 5 products" do
@@ -20,14 +20,14 @@ describe VendingMachine do
     before do
       @vending_machine = VendingMachine.new
 
-      @vending_machine.coins = []
+      @vending_machine.bank.coins = {}
       @vending_machine.products = @vending_machine.products.first(2)
 
       @vending_machine.restock
     end
 
     it "resets coins to 100 random coins" do
-      assert_equal 100, @vending_machine.coins.count
+      assert_equal 100, @vending_machine.bank.count
     end
 
     it "resets products to 5 products" do

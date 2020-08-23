@@ -2,6 +2,7 @@ require_relative '../model/vending_machine'
 require "readline"
 
 class Repl
+  include CurrencyHelper
 
   attr :vending_machine
 
@@ -25,6 +26,9 @@ class Repl
     case command
     when "contents"
       @vending_machine.print_contents
+    when "bank"
+      @vending_machine.bank.print_contents
+      puts "Sum: #{format_currency @vending_machine.bank.sum}"
     else
       puts "Unrecognised command '#{command}'"
     end
