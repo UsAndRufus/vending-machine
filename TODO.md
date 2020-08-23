@@ -5,7 +5,7 @@
 - ~~Restock vending machine~~
 - ~~REPL~~
 - ~~Parse input~~
-- Nice printing
+- ~~Nice printing~~
 - Insert coins
 - Purchase product
 - Dispense change

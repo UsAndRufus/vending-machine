@@ -1,5 +1,5 @@
 require 'securerandom'
-require_relative 'helper/currency_helper'
+require_relative '../helper/currency_helper'
 
 class Product
   include CurrencyHelper

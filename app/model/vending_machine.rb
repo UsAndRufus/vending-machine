@@ -19,21 +19,6 @@ class VendingMachine
     stock_products
   end
 
-  def print_contents
-    print_coins
-    print_products
-  end
-
-  def print_coins
-    puts "Coins:"
-    @bank.print_contents
-  end
-
-  def print_products
-    puts "Products:"
-    @products.each { |c| puts " - #{c.to_s}" }
-  end
-
   protected
 
   def stock_coins

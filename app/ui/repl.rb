@@ -1,13 +1,14 @@
 require_relative '../model/vending_machine'
-require "readline"
+require_relative 'printer'
+
+require 'readline'
 
 class Repl
-  include CurrencyHelper
-
   attr :vending_machine
 
   def initialize
     @vending_machine = VendingMachine.new
+    @printer = Printer.new
   end
 
   def run
@@ -24,13 +25,25 @@ class Repl
     command, value = input.split
 
     case command
-    when "contents"
-      @vending_machine.print_contents
     when "bank"
-      @vending_machine.bank.print_contents
-      puts "Sum: #{format_currency @vending_machine.bank.sum}"
+      bank
+    when "contents"
+      contents
     else
-      puts "Unrecognised command '#{command}'"
+      unrecognised command
     end
+  end
+
+
+  def bank
+    @printer.print_coins @vending_machine
+  end
+
+  def contents
+    @printer.print_contents @vending_machine
+  end
+
+  def unrecognised(command)
+    puts "Unrecognised command '#{command}'"
   end
 end

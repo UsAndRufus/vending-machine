@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative '../../../app/model/helper/currency_helper'
+require_relative '../../app/helper/currency_helper'
 
 class CurrencyHelperTest < Minitest::Test
   include CurrencyHelper
