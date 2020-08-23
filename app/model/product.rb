@@ -1,6 +1,9 @@
 require 'securerandom'
+require_relative 'helper/currency_helper'
 
 class Product
+  include CurrencyHelper
+
   attr :id, :name, :price
 
   def initialize(name, price)
@@ -10,6 +13,6 @@ class Product
   end
 
   def to_s
-    "#{name} (#{price})"
+    "#{name} (#{format_currency price})"
   end
 end
