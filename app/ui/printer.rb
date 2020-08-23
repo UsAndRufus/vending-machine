@@ -3,23 +3,36 @@ require_relative '../helper/currency_helper'
 class Printer
   include CurrencyHelper
 
-  def print_contents(vending_machine)
-    print_coins vending_machine
-    print_products vending_machine
+  def initialize(vending_machine)
+    @vending_machine = vending_machine
   end
 
-  def print_coins(vending_machine)
+  def welcome
+    puts "Welcome to the vending machine!"
+    puts "We accept #{Coin::COINS.keys.join(", ")} coins"
+    puts "Use Ctrl+D to exit\n\n"
+
+    print_contents
+  end
+
+  def print_contents
+    print_coins
+    puts "\n"
+    print_products
+  end
+
+  def print_coins
     puts "Coins:"
-    vending_machine.bank.print_contents
-    puts "Sum: #{format_currency vending_machine.bank.sum}"
+    puts @vending_machine.bank.contents_string
+    puts "Sum: #{format_currency @vending_machine.bank.sum}"
   end
 
-  def print_payment(vending_machine)
-    puts "Current payment: #{format_currency vending_machine.payment.sum}"
+  def print_payment
+    puts "Current payment: #{format_currency @vending_machine.payment.sum}"
   end
 
-  def print_products(vending_machine)
+  def print_products
     puts "Products:"
-    vending_machine.products.values.each { |c| puts " - #{c.to_s}" }
+    @vending_machine.products.values.each { |c| puts " - #{c.to_s}" }
   end
 end

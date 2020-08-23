@@ -1,13 +1,11 @@
-require 'securerandom'
 require_relative '../helper/currency_helper'
 
 class Product
   include CurrencyHelper
 
-  attr :id, :name, :price
+  attr :name, :price
 
   def initialize(name, price)
-    @id = SecureRandom.hex
     @name = name
     @price = price
   end

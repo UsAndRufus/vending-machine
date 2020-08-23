@@ -16,8 +16,8 @@ class CoinStore
     coins.each { |coin| add coin}
   end
 
-  def print_contents
-    @coins.each { |key, value| puts " - #{key}: #{value.count}" }
+  def contents_string
+    @coins.map { |key, value| " - #{key}: #{value.count}" }.join("\n")
   end
 
   def dispense(value)

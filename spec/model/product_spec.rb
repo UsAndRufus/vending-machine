@@ -13,10 +13,6 @@ describe Product do
       assert_equal @name, @product.name
       assert_equal @price, @product.price
     end
-
-    it "generates an ID for the item" do
-      assert !@product.id.nil?
-    end
   end
 end
 
