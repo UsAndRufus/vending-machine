@@ -8,7 +8,7 @@
 - ~~Nice printing~~
 - ~~Insert coins~~
 - ~~Purchase product~~
-- Dispense change
+- ~~Dispense change~~
 - ~~Don't dispense if not enough cash~~
 - ~~Print contents~~
 

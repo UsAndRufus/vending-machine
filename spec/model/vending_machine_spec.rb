@@ -44,9 +44,33 @@ describe VendingMachine do
       @vending_machine.insert @coin
       @vending_machine.insert @coin
 
-      assert_equal "Enjoy your Crisps!", @vending_machine.purchase("crisps")
+      assert_equal "Enjoy your Crisps! Your change is: 50p", @vending_machine.purchase("crisps")
 
       assert_equal 0, @vending_machine.products.count
+    end
+  end
+
+  describe "When calling dispense_change" do
+    before do
+      @vending_machine = VendingMachine.new
+      @vending_machine.bank.empty
+      @vending_machine.bank.stock [ Coin::FIVE_PENCE, Coin::FIVE_PENCE, Coin::TWENTY_PENCE, Coin::TWENTY_PENCE ]
+
+      @vending_machine.payment.empty
+      @vending_machine.payment.stock [Coin::ONE_PENCE, Coin::ONE_POUND]
+    end
+
+    it "should combine the coin stores" do
+      @vending_machine.send(:dispense_change_for, 55)
+      assert @vending_machine.payment.coins.empty?
+
+      expected = {"£1" => [Coin::ONE_POUND], "5p" => [Coin::FIVE_PENCE]}
+      assert_equal expected, @vending_machine.bank.coins
+    end
+
+    it "should dispense the change" do
+      assert_equal [Coin::TWENTY_PENCE, Coin::TWENTY_PENCE, Coin::FIVE_PENCE, Coin::ONE_PENCE],
+                   @vending_machine.send(:dispense_change_for, 55)
     end
   end
 

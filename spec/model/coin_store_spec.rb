@@ -58,6 +58,39 @@ describe CoinStore do
     end
   end
 
+  describe "When calling dispense_change_for" do
+    before do
+      @coin_store = CoinStore.new
+      @coin_store.stock [ Coin::ONE_PENCE, Coin::FIVE_PENCE, Coin::FIVE_PENCE, Coin::TEN_PENCE,
+                          Coin::FIFTY_PENCE, Coin::FIFTY_PENCE, Coin::TWO_POUND ]
+    end
+
+    it "should return nil if it can't dispense the coins because it doesn't have enough value" do
+      assert_nil @coin_store.dispense(450)
+    end
+
+    it "should return nil if it can't dispense the coins because it doesn't have the right coins" do
+      assert_nil @coin_store.dispense(17)
+    end
+
+    it "should return the coins and delete the coins from its store if the correct amount can be dispense" do
+      coins = @coin_store.dispense(311)
+
+      assert_equal [Coin::TWO_POUND, Coin::FIFTY_PENCE, Coin::FIFTY_PENCE, Coin::TEN_PENCE, Coin::ONE_PENCE], coins
+
+      expected = { "5p" => [ Coin::FIVE_PENCE, Coin::FIVE_PENCE ] }
+      assert_equal expected, @coin_store.coins
+    end
+
+    it "should return the coins and not give an off by one error" do
+      @coin_store = CoinStore.new
+      @coin_store.stock [ Coin::ONE_POUND, Coin::FIVE_PENCE, Coin::ONE_PENCE]
+
+      assert_equal [Coin::FIVE_PENCE, Coin::ONE_PENCE], @coin_store.dispense(6)
+
+    end
+  end
+
   describe "When calling sum" do
     before do
       @coin_store = CoinStore.new
@@ -76,6 +109,21 @@ describe CoinStore do
       @coin_store.add Coin::FIFTY_PENCE
 
       assert_equal 457, @coin_store.sum
+    end
+  end
+
+  describe "When calling empty" do
+    before do
+      @coin_store = CoinStore.new
+      @coins = [ Coin::ONE_PENCE, Coin::ONE_PENCE, Coin::FIVE_PENCE, Coin::TWO_POUND, Coin::TWO_POUND ]
+      @coin_store.stock @coins
+    end
+
+    it "should return the coins in the bank" do
+      assert_equal @coins, @coin_store.empty
+    end
+    it "reset the hash" do
+      assert @coin_store.empty
     end
   end
 

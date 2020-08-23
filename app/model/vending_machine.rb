@@ -28,8 +28,13 @@ class VendingMachine
       product = @products[product_name]
 
       if payment.sum > product.price
-        dispense product_name
-        "Enjoy your #{product.name}!"
+        change = dispense_change_for product.price
+        dispense_product product_name
+        msg = "Enjoy your #{product.name}! "
+        if change.count > 0
+          msg << "Your change is: #{change.map { |p| format_currency(p.value) }.join(", ")}"
+        end
+        msg
       else
         "Not enough money - you have entered #{format_currency payment.sum}, but the product costs #{format_currency product.price}"
       end
@@ -45,8 +50,15 @@ class VendingMachine
 
   protected
 
-  def dispense(product_name)
-    products.delete product_name
+  def dispense_change_for(price)
+    paid = @payment.empty
+    @bank.stock paid
+
+    @bank.dispense paid.sum - price
+  end
+
+  def dispense_product(name)
+    products.delete name
   end
 
   def stock_coins
