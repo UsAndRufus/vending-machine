@@ -14,8 +14,12 @@ class Printer
     puts "Sum: #{format_currency vending_machine.bank.sum}"
   end
 
+  def print_payment(vending_machine)
+    puts "Current payment: #{format_currency vending_machine.payment.sum}"
+  end
+
   def print_products(vending_machine)
     puts "Products:"
-    vending_machine.products.each { |c| puts " - #{c.to_s}" }
+    vending_machine.products.values.each { |c| puts " - #{c.to_s}" }
   end
 end

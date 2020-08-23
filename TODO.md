@@ -6,9 +6,9 @@
 - ~~REPL~~
 - ~~Parse input~~
 - ~~Nice printing~~
-- Insert coins
-- Purchase product
+- ~~Insert coins~~
+- ~~Purchase product~~
 - Dispense change
-- Don't dispense if not enough cash
-- Print contents
+- ~~Don't dispense if not enough cash~~
+- ~~Print contents~~
 

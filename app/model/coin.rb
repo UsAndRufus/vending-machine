@@ -1,5 +1,7 @@
 class Coin
 
+  attr :name, :value
+
   def initialize(name, value)
     @name = name
     @value = value
@@ -14,10 +16,17 @@ class Coin
   ONE_POUND = Coin.new("£1", 100).freeze
   TWO_POUND = Coin.new("£2", 200).freeze
 
+  COINS = [ONE_PENCE, TWO_PENCE, FIVE_PENCE, TEN_PENCE, TWENTY_PENCE, FIFTY_PENCE, ONE_POUND, TWO_POUND]
+            .map{|coin| [coin.name, coin] }.to_h
+
   attr_accessor :name, :value
 
   def self.random
-    [ONE_PENCE, TWO_PENCE, FIVE_PENCE, TEN_PENCE, TWENTY_PENCE, FIFTY_PENCE, ONE_POUND, TWO_POUND].sample.clone
+    COINS.values.sample.clone
+  end
+
+  def self.parse(value)
+    COINS[value].clone
   end
 
   def +(obj)
@@ -35,4 +44,5 @@ class Coin
   def to_s
     name
   end
+
 end

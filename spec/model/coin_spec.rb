@@ -18,6 +18,19 @@ describe Coin do
       assert_equal 201, @coin + 1
     end
   end
+
+  describe "When parsing a coin" do
+    it "returns a coin if the coin exists" do
+      coin = Coin.parse("50p")
+      assert coin.is_a? Coin
+      assert_equal 50, coin.value
+      assert_equal "50p", coin.name
+    end
+
+    it "returns nil if the coin does not exist" do
+      assert_nil Coin.parse("£3")
+    end
+  end
 end
 
 
